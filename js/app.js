@@ -58,15 +58,13 @@ function getLayer(id, popup, otherPopup, style) {
       document.body.style.cursor = "default";
     },
     featureClick: function(e, latlng, pos, data) {
+    console.log(data);
 
       var
       lat    = data.latitude,
       lng    = data.longitude,
       latLng = new L.LatLng(lat, lng),
       other  = (id == "actual") ? "gdp" : "actual";
-
-      delete(data.latitude);
-      delete(data.longitude);
 
       var otherData = jQuery.extend({}, data);
 
@@ -85,11 +83,13 @@ function getLayer(id, popup, otherPopup, style) {
       if (!popups[id].open) maps[id].openPopup(popups[id].p);
       if (!popups[other].open) maps[other].openPopup(popups[other].p);
 
-      console.log(popups);
     },
   });
 }
 
+function dragEnd(e) {
+  maps[mapToMove].panTo(e.target.getCenter());
+}
 function drag(e) {
   maps[mapToMove].panTo(e.target.getCenter());
 }
@@ -143,6 +143,9 @@ function init() {
   // Events
   maps.actual.on('dragstart', dragStart);
   maps.gdp.on('dragstart', dragStart);
+
+  maps.actual.on('dragend', dragEnd);
+  maps.gdp.on('dragend', dragEnd);
 
   maps.actual.on('drag', drag);
   maps.gdp.on('drag', drag);
