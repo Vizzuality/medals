@@ -110,19 +110,28 @@ div.cartodb-popup {
     text-align: center;
 
     .total {
-      font-size: 43px;
-      font-weight:bold;
-      font-family: "Helvetica", Arial, sans-serif;
-      color: $cActual;
+
+
       padding: 0 0 8px 6px;
       margin: 0 0 10px 0;
       border-bottom: 1px solid rgba(0, 0, 0, .09);
 
-      .count { @include inline-block(); }
+      &.map-actual .count { color: $cActual; }
+      &.map-gdp .count { color: $cGDP; }
+
+      .count {
+        @include inline-block();
+        font-size: 43px;
+        font-weight:bold;
+        font-family: "Helvetica", Arial, sans-serif;
+      }
+
+      &.map-actual .icon { @include icons-sprite(medal-actual); }
+      &.map-gdp .icon { @include icons-sprite(medal-gdp); }
+
       .icon {
         @include inline-block();
         @include size(21px, 31px);
-        @include icons-sprite(medal-actual);
       }
     }
 

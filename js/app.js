@@ -59,15 +59,24 @@ function getLayer(id, popup, otherPopup, style) {
     },
     featureClick: function(e, latlng, pos, data) {
 
-      var latLng = new L.LatLng(data.latitude, data.longitude);
-      var other  = (id == "actual") ? "gdp" : "actual";
+      var
+      lat    = data.latitude,
+      lng    = data.longitude,
+      latLng = new L.LatLng(lat, lng),
+      other  = (id == "actual") ? "gdp" : "actual";
 
       delete(data.latitude);
       delete(data.longitude);
 
+
+      var otherData = jQuery.extend({}, data);
+
+      otherData.id = "map-" +other;
+      data.id = "map-"+ id;
+
       // Set popup content
       popups[id].p.setContent(data);
-      popups[other].p.setContent(data);
+      popups[other].p.setContent(otherData);
 
       // Set latlng
       popups[id].p.setLatLng(latLng);
