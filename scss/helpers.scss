@@ -9,16 +9,12 @@ $cGray2:                 #666666;
 $cGray1:                 #333333;
 $cGray0:                 #000000;
 
+
+$cActual:                #FFA900;
+$cGDP:                   #66CCCC;
+
 // Sprites
-$icons-bullet-orange-spacing: 25px;
-$icons-bullet-yellow-spacing: 25px;
-$icons-bullet-black-spacing:  25px;
-$icons-pause-spacing:         35px;
-$icons-pause_hover-spacing:   35px;
-$icons-pause_active-spacing:  35px;
-$icons-play-spacing:          25px;
-$icons-play_hover-spacing:    25px;
-$icons-play_active-spacing:   25px;
+/*$icons-bullet-orange-spacing: 25px;*/
 
 @import "icons/*.png"; /**/
 
@@ -113,19 +109,4 @@ $icons-play_active-spacing:   25px;
 
 // ie hacks
 .lt-ie10 {
-
-  .cartodb_logo, aside, #graph, #progress, #counters {
-    @include opacity(0);
-  }
-
-  .cartodb_logo, aside, #graph, #spinner, #progress, #counters {
-
-    &.fadeIn, &.slowFadeIn {
-      @include opacity(1);
-    }
-
-    &.fadeOut {
-      @include opacity(0);
-    }
-  }
 }
