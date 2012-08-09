@@ -131,6 +131,7 @@ div.cartodb-popup {
 
       .icon {
         @include inline-block();
+        margin: 0 3px 0 0;
         @include size(21px, 31px);
       }
     }
@@ -152,10 +153,10 @@ div.cartodb-popup {
 
     .population {
       margin: 0 0 5px 0;
-    .icon {
-      @include icons-sprite(people);
+      .icon {
+        @include icons-sprite(people);
+      }
     }
-  }
 
     .gdp .icon {
       @include icons-sprite(coins);

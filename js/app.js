@@ -15,7 +15,7 @@ CONFIG = {
   table: 'london_2012_olympic_',
   center: new L.LatLng(36, -3),
   zoom: 4,
-  query: "SELECT country_name, total_pop, ST_X(ST_Centroid(the_geom)) as longitude, ST_Y(ST_Centroid(the_geom)) as latitude, cartodb_id, the_geom_webmercator, iso, total_gdp, total, the_geom FROM {{table_name}}",
+  query: "SELECT ST_X(ST_Centroid(the_geom)) as longitude, ST_Y(ST_Centroid(the_geom)) as latitude, the_geom_webmercator, country_name, iso, total_pop, total_gdp, total, the_geom FROM {{table_name}}",
   tileURL: 'http:///{s}.tile.stamen.com/toner/{z}/{x}/{y}.png',
   mapOptions: { maxZoom: 18, attribution: "Powered by Leaflet and Mapbox", zoomControl: false},
   styles: {
