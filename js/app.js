@@ -58,7 +58,6 @@ function getLayer(id, popup, otherPopup, style) {
       document.body.style.cursor = "default";
     },
     featureClick: function(e, latlng, pos, data) {
-    console.log(data);
 
       var
       lat    = data.latitude,
