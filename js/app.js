@@ -1,7 +1,8 @@
-var selectedMap = null,
-mapToMove = null;
+var
+maps        = {}
+selectedMap = null,
+mapToMove   = null;
 
-maps = {};
 
 var
 CONFIG = {
@@ -14,81 +15,90 @@ CONFIG = {
   mapOptions: {maxZoom: 18, attribution: "Powered by Leaflet and Mapbox"},
   styles: {
     gdp: "#london_2012_olympic_ { point-file: url(/home/ubuntu/tile_assets/viz2/blueDot2.svg); point-allow-overlap:true; text-face-name: 'DejaVu Sans Bold'; text-fill:#000; text-size:10; text-halo-fill:rgba(255,255,255,1); text-halo-radius:0; text-line-spacing:1; text-wrap-width:20; text-opacity:.7; text-allow-overlap:true; text-name:'[iso]'; line-width:1.3; } " +
-      "#london_2012_olympic_ [total_gdp<=121.79] { point-transform:'scale(2.2)'; } " +
-      "#london_2012_olympic_ [total_gdp<=60]  { point-transform:'scale(1.7)'; } " +
-      "#london_2012_olympic_ [total_gdp<=30]  { point-transform:'scale(1.3)'; } " +
-      "#london_2012_olympic_ [total_gdp<=10]  { point-transform:'scale(1)'; } " +
-      "#london_2012_olympic_ [total_gdp<=5]   { point-transform:'scale(0.5)'; } " +
-      "#london_2012_olympic_ [total_gdp<=3.5] { text-allow-overlap:false; point-transform:'scale(0.4)'; } " +
-      "#london_2012_olympic_ [total_gdp<=2]   { point-transform:'scale(0.3)'; } " +
-      "#london_2012_olympic_ [total_gdp<=1]   { point-transform:'scale(0.2)'; } " +
-      "#london_2012_olympic_ [total_gdp=0]    { point-transform:'scale(0)'; } ",
+      "#london_2012_olympic_ [total_gdp <= 121] { point-transform:'scale(2.2)'; } " +
+      "#london_2012_olympic_ [total_gdp <= 60]  { point-transform:'scale(1.7)'; } " +
+      "#london_2012_olympic_ [total_gdp <= 30]  { point-transform:'scale(1.3)'; } " +
+      "#london_2012_olympic_ [total_gdp <= 10]  { point-transform:'scale(1)';   } " +
+      "#london_2012_olympic_ [total_gdp <= 5]   { point-transform:'scale(0.5)'; } " +
+      "#london_2012_olympic_ [total_gdp <= 3.5] { text-allow-overlap:false; point-transform:'scale(0.4)'; } " +
+      "#london_2012_olympic_ [total_gdp <= 2]   { point-transform:'scale(0.3)'; } " +
+      "#london_2012_olympic_ [total_gdp <= 1]   { point-transform:'scale(0.2)'; } " +
+      "#london_2012_olympic_ [total_gdp = 0]    { point-transform:'scale(0)'; } ",
     actual: "#london_2012_olympic_ { point-file: url(/home/ubuntu/tile_assets/viz2/orangeDot2.svg); point-allow-overlap:true; text-face-name: 'DejaVu Sans Bold'; text-fill:#000; text-size:10; text-halo-fill:rgba(255,255,255,1); text-halo-radius:0; text-line-spacing:1; text-wrap-width:20; text-opacity:.7; text-allow-overlap:true; text-name:'[iso]'; line-width:1.3; }" +
-      "#london_2012_olympic_ [total<=100] { point-transform:'scale(2.3)'; }" +
-      "#london_2012_olympic_ [total<=50]  { point-transform:'scale(1.8)'; }" +
-      "#london_2012_olympic_ [total<=30]  { point-transform:'scale(1.4)'; }" +
-      "#london_2012_olympic_ [total<=15]  { point-transform:'scale(1.2)'; }" +
-      "#london_2012_olympic_ [total<=10]  { point-transform:'scale(1)'; }" +
-      "#london_2012_olympic_ [total<=8]   { point-transform:'scale(0.75)'; }" +
-      "#london_2012_olympic_ [total<=4]   { point-transform:'scale(0.4)'; text-allow-overlap:false; }" +
-      "#london_2012_olympic_ [total<=2]   { point-transform:'scale(0.15)'; }" +
-      "#london_2012_olympic_ [total=0]    { point-transform:'scale(0)'; }"
+      "#london_2012_olympic_ [total <= 100] { point-transform:'scale(2.3)'; }" +
+      "#london_2012_olympic_ [total <= 50]  { point-transform:'scale(1.8)'; }" +
+      "#london_2012_olympic_ [total <= 30]  { point-transform:'scale(1.4)'; }" +
+      "#london_2012_olympic_ [total <= 15]  { point-transform:'scale(1.2)'; }" +
+      "#london_2012_olympic_ [total <= 10]  { point-transform:'scale(1)'; }" +
+      "#london_2012_olympic_ [total <= 8]   { point-transform:'scale(0.75)'; }" +
+      "#london_2012_olympic_ [total <= 4]   { point-transform:'scale(0.4)'; text-allow-overlap:false; }" +
+      "#london_2012_olympic_ [total <= 2]   { point-transform:'scale(0.15)'; }" +
+      "#london_2012_olympic_ [total = 0]    { point-transform:'scale(0)'; }"
   }
 };
 
+function getLayer(map, style) {
+  return new L.CartoDBLayer({
+    map: map,
+    user_name: CONFIG.user,
+    table_name: CONFIG.table,
+    query: CONFIG.query,
+    tile_style: style
+  });
+}
+
+function drag(e) {
+  maps[mapToMove].panTo(e.target.getCenter());
+}
+
+function dragStart(e) {
+  var id = $(e.target._container).attr("id");
+
+  mapToMove = (id == "actual") ? "gdp" : "actual";
+}
+
+function zoomEnd(e) {
+
+  var id = $(e.target._container).attr("id");
+  var mapToZoom = (id == "actual") ? "gdp" : "actual";
+
+  maps[mapToZoom].setZoom(e.target.getZoom());
+
+}
+
 function init() {
 
+  // Create the maps
   maps.actual = new L.Map('actual').setView(CONFIG.center, CONFIG.zoom);
   maps.gdp    = new L.Map('gdp').setView(CONFIG.center, CONFIG.zoom);
 
-  var mapboxUrl = CONFIG.tileURL,
-  mapbox = new L.TileLayer(mapboxUrl, CONFIG.mapOptions);
+  // Layers configuration
+  var layers = {
+    actual: {
+      base: new L.TileLayer(CONFIG.tileURL, CONFIG.mapOptions),
+      data: getLayer(maps.actual, CONFIG.styles.actual)
+    },
+    gdp: {
+      base: new L.TileLayer(CONFIG.tileURL, CONFIG.mapOptions),
+      data: getLayer(maps.gdp, CONFIG.styles.gdp)
+    }
+  };
 
-  var mapboxUrl2 = CONFIG.tileURL,
-  mapbox2 = new L.TileLayer(mapboxUrl, CONFIG.mapOptions);
+  // Add layers
+  maps.actual.addLayer(layers.actual.base, true);
+  maps.actual.addLayer(layers.actual.data);
 
-  var gdp = new L.CartoDBLayer({
-    map: maps.gdp,
-    user_name: CONFIG.user,
-    table_name: CONFIG.table,
-    query: CONFIG.query,
-    tile_style: CONFIG.styles.gdp
-  });
-
-  var actual = new L.CartoDBLayer({
-    map: maps.actual,
-    user_name: CONFIG.user,
-    table_name: CONFIG.table,
-    query: CONFIG.query,
-    tile_style: CONFIG.styles.actual
-  });
-
-  maps.actual.addLayer(mapbox, true);
-  maps.gdp.addLayer(mapbox2, true);
-
-  maps.actual.addLayer(actual);
-  maps.gdp.addLayer(gdp);
+  maps.gdp.addLayer(layers.gdp.base, true);
+  maps.gdp.addLayer(layers.gdp.data);
 
   // Events
-  maps.actual.on('dragstart', dragstart);
-  maps.gdp.on('dragstart', dragstart);
+  maps.actual.on('dragstart', dragStart);
+  maps.gdp.on('dragstart', dragStart);
 
   maps.actual.on('drag', drag);
   maps.gdp.on('drag', drag);
 
-  function drag(e) {
-    maps[mapToMove].panTo(e.target.getCenter());
-  }
-
-  function dragstart(e) {
-    var id = $(e.target._container).attr("id");
-    if (id == "actual") mapToMove = "gdp";
-    else mapToMove = "actual";
-  }
-
-  function dragend() {
-    console.log('end');
-
-  }
+  maps.actual.on('zoomend', zoomEnd);
+  maps.gdp.on('zoomend', zoomEnd);
 }
 
