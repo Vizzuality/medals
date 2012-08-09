@@ -7,32 +7,47 @@ html, body { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
 body { font-family: "Helvetica", Arial, sans-serif; }
 
 .maps {
-  $width: 390px;
 
-  li {
-    @include inline-block();
-    width: $width;
-
-    h1 {
-      margin: 0 0 5px 0;
-      padding: 20px 0;
-      color: $cWhite;
-      text-align:center;
-      text-transform: uppercase;
-      font-size:14px;
-      font-weight: bold;
-      font-family: "Helvetica Neue", sans-serif;
-    }
-
-    &.actual h1 { background: $cActual; }
-    &.gdp    h1 { background: $cGDP; }
-  }
-
-  .map {
+    $width: 390px;
     $height: 461px;
 
-    background: $cGray5;
+      .divider {
+        @include position(-5px, false, false, $width - 8);
+        width: 16px;
+        height: 525px;
+        @include icons-sprite(divider);
 
-    @include size($width, $height);
+        z-index: 1000;
+      }
+
+  ul {
+
+    @include clearfix();
+
+    li {
+      float:left;
+      width: $width;
+      position:relative;
+
+      .map {
+        background: $cGray5;
+        @include size($width, $height);
+      }
+
+      h1 {
+        margin: 0 0 5px 0;
+        padding: 20px 0;
+        color: $cWhite;
+        text-align:center;
+        text-transform: uppercase;
+        font-size:14px;
+        font-weight: bold;
+        font-family: "Helvetica Neue", sans-serif;
+      }
+
+      &.actual h1 { background: $cActual; }
+      &.gdp    h1 { background: $cGDP; }
+    }
   }
+
 }
