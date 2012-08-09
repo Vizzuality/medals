@@ -20,7 +20,7 @@ L.CartoDBPopup = L.Class.extend({
     maxHeight: null,
     autoPan: true,
     closeButton: true,
-    offset: new L.Point(0, 5),
+    offset: new L.Point(0, -10),
     autoPanPadding: new L.Point(5, 5),
     className: ''
   },
