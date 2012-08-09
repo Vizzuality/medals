@@ -10,7 +10,7 @@ CONFIG = {
   center: new L.LatLng(36, -3),
   zoom: 4,
   query: "SELECT * FROM {{table_name}}",
-  tileURL: 'http://{s}.tiles.mapbox.com/v3/cartodb.map-1nh578vv/{z}/{x}/{y}.png',
+  tileURL: 'http:///{s}.tile.stamen.com/toner/{z}/{x}/{y}.png',
   mapOptions: {maxZoom: 18, attribution: "Powered by Leaflet and Mapbox"},
   styles: {
     gdp: "#london_2012_olympic_ { point-file: url(/home/ubuntu/tile_assets/viz2/blueDot2.svg); point-allow-overlap:true; text-face-name: 'DejaVu Sans Bold'; text-fill:#000; text-size:10; text-halo-fill:rgba(255,255,255,1); text-halo-radius:0; text-line-spacing:1; text-wrap-width:20; text-opacity:.7; text-allow-overlap:true; text-name:'[iso]'; line-width:1.3; } " +
