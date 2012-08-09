@@ -68,11 +68,10 @@ function getLayer(id, popup, otherPopup, style) {
       delete(data.latitude);
       delete(data.longitude);
 
-
       var otherData = jQuery.extend({}, data);
 
-      otherData.id = "map-" +other;
-      data.id = "map-"+ id;
+      otherData.id = "map-" + other;
+      data.id      = "map-" + id;
 
       // Set popup content
       popups[id].p.setContent(data);
@@ -116,11 +115,11 @@ function init() {
   maps.actual = new L.Map('actual', { zoomControl: false }).setView(CONFIG.center, CONFIG.zoom);
   maps.gdp    = new L.Map('gdp',    { zoomControl: false }).setView(CONFIG.center, CONFIG.zoom);
 
-maps.actual.on("popupopen", function() { popups.actual.open = true; });
-maps.actual.on("popupclose", function() { popups.actual.open = false; });
+  maps.actual.on("popupopen", function() { popups.actual.open = true; });
+  maps.actual.on("popupclose", function() { popups.actual.open = false; });
 
-maps.gdp.on("popupopen", function() { popups.gdp.open = true; });
-maps.gdp.on("popupclose", function() { popups.gdp.open = false; });
+  maps.gdp.on("popupopen", function() { popups.gdp.open = true; });
+  maps.gdp.on("popupclose", function() { popups.gdp.open = false; });
 
   // Layers configuration
   var layers = {
@@ -150,5 +149,16 @@ maps.gdp.on("popupclose", function() { popups.gdp.open = false; });
 
   maps.actual.on('zoomend', zoomEnd);
   maps.gdp.on('zoomend', zoomEnd);
+
+  $(".zoom_in").on("click", function() {
+    var id = $(this).parents(".zoom").siblings('.map').attr("id");
+    maps[id].setZoom(maps[id].getZoom() + 1);
+  });
+
+  $(".zoom_out").on("click", function() {
+    var id = $(this).parents(".zoom").siblings('.map').attr("id");
+    maps[id].setZoom(maps[id].getZoom() - 1);
+
+  });
 }
 
