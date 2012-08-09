@@ -7,7 +7,7 @@
  *               Licensed under <a
  *               href="http://opensource.org/licenses/mit-license.php">MIT</a>
  *               license.<br/> This library lets you to use a new Popup with Leaflet.
- *                 
+ *
  */
 
 
@@ -20,7 +20,7 @@ L.CartoDBPopup = L.Class.extend({
     maxHeight: null,
     autoPan: true,
     closeButton: true,
-    offset: new L.Point(58, 2),
+    offset: new L.Point(0, 5),
     autoPanPadding: new L.Point(5, 5),
     className: ''
   },
@@ -109,7 +109,7 @@ L.CartoDBPopup = L.Class.extend({
 
       var div = this._container
         , that = this;
-    
+
       emile(div,{
         bottom: '-=' + 10 + 'px',
         opacity: 0,
@@ -122,7 +122,7 @@ L.CartoDBPopup = L.Class.extend({
       });
     }
   },
- 
+
   /**
    * Create the default content for the popup (private)
    */
@@ -135,24 +135,24 @@ L.CartoDBPopup = L.Class.extend({
     L.DomEvent.addListener(container, 'touchend', L.DomEvent.stopPropagation);
 
     if (this.options.closeButton) {
-      closeButton = this._closeButton = L.DomUtil.create('a', prefix + '-close-button', container);
-      closeButton.href = '#close';
-      closeButton.innerHTML = 'x';
+      //closeButton = this._closeButton = L.DomUtil.create('a', 'close', container);
+      //closeButton.href = '#close';
+      //closeButton.innerHTML = 'x';
 
-      L.DomEvent.addListener(closeButton, 'click', this._onCloseButtonClick, this);
-      L.DomEvent.addListener(closeButton, 'touchend', this._onCloseButtonClick, this);
-      L.DomEvent.disableClickPropagation(closeButton);
+      //L.DomEvent.addListener(closeButton, 'click', this._onCloseButtonClick, this);
+      //L.DomEvent.addListener(closeButton, 'touchend', this._onCloseButtonClick, this);
+      //L.DomEvent.disableClickPropagation(closeButton);
     }
 
-    var wrapper = this._wrapper = L.DomUtil.create('div', prefix + '-content-wrapper', container);
+    var wrapper = this._wrapper = L.DomUtil.create('div', 'wrapper', container);
     L.DomEvent.addListener(this._wrapper, 'click', L.DomEvent.stopPropagation);
     L.DomEvent.disableClickPropagation(wrapper);
 
-    this._contentNode = L.DomUtil.create('div', prefix + '-content', wrapper);
+    this._contentNode = L.DomUtil.create('div', 'content', wrapper);
     L.DomEvent.addListener(this._contentNode, 'mousewheel', L.DomEvent.stopPropagation);
 
-    this._tipContainer = L.DomUtil.create('div', prefix + '-tip-container', container);
-    this._tip = L.DomUtil.create('div', prefix + '-tip', this._tipContainer);
+    this._tipContainer = L.DomUtil.create('div', 'tip', container);
+    this._tip = L.DomUtil.create('div', 'tip', this._tipContainer);
   },
 
 
@@ -191,12 +191,8 @@ L.CartoDBPopup = L.Class.extend({
       this._contentNode.innerHTML = '';
       var html = '';
       for(var column in this._content) {
-        if (column == "cartodb_id") {
-          this._tipContainer.innerHTML = '<label>id: <strong>'+this._content[column]+'</strong></label>';
-        } else {
-          html += '<label>' + column + '</label>';
-          html += '<p class="'+((this._content[column]!=null && this._content[column]!='')?'':'empty')+'">'+(this._content[column] || 'empty')+'</p>';
-        }
+        html += '<div class="'+((this._content[column]!=null && this._content[column]!='')?'':'empty')+'">'+(this._content[column] || 'empty')+'</div>';
+        //html += '<div class="'+((this._content[column]!=null && this._content[column]!='')?'':'empty')+'">'+(this._content[column] || 'empty')+'</div>';
       }
       this._contentNode.innerHTML = html;
     }
