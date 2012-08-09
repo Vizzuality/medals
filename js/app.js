@@ -17,7 +17,8 @@ CONFIG = {
   zoom: 4,
   query: "SELECT ST_X(ST_Centroid(the_geom)) as longitude, ST_Y(ST_Centroid(the_geom)) as latitude, the_geom_webmercator, country_name, iso, total_pop, total_gdp, total, the_geom FROM {{table_name}}",
   tileURL: 'http:///{s}.tile.stamen.com/toner/{z}/{x}/{y}.png',
-  mapOptions: { maxZoom: 18, attribution: "Powered by Leaflet and Mapbox", zoomControl: false},
+  mapOptionsActual: { maxZoom: 18, attribution: "", zoomControl: false},
+  mapOptionsGDP:    { maxZoom: 18, attribution: 'Powered by <a href="http://leaflet.cloudmade.com">Leaflet</a>', zoomControl: false},
   styles: {
     gdp: "#london_2012_olympic_ { point-file: url(/home/ubuntu/tile_assets/viz2/blueDot2.svg); point-allow-overlap:true; text-face-name: 'DejaVu Sans Bold'; text-fill:#000; text-size:10; text-halo-fill:rgba(255,255,255,1); text-halo-radius:0; text-line-spacing:1; text-wrap-width:20; text-opacity:.7; text-allow-overlap:true; text-name:'[iso]'; line-width:1.3; } " +
       "#london_2012_olympic_ [total_gdp <= 121] { point-transform:'scale(2.2)'; } " +
@@ -123,11 +124,11 @@ function init() {
   // Layers configuration
   var layers = {
     actual: {
-      base: new L.TileLayer(CONFIG.tileURL, CONFIG.mapOptions),
+      base: new L.TileLayer(CONFIG.tileURL, CONFIG.mapOptionsActual),
       data: getLayer("actual", popups.actual, popups.gdp, CONFIG.styles.actual)
     },
     gdp: {
-      base: new L.TileLayer(CONFIG.tileURL, CONFIG.mapOptions),
+      base: new L.TileLayer(CONFIG.tileURL, CONFIG.mapOptionsGDP),
       data: getLayer("gdp", popups.gdp, popups.actual, CONFIG.styles.gdp)
     }
   };
