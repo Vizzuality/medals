@@ -190,10 +190,12 @@ L.CartoDBPopup = L.Class.extend({
     } else {
       this._contentNode.innerHTML = '';
       var html = '';
-      for(var column in this._content) {
-        html += '<div class="'+((this._content[column]!=null && this._content[column]!='')?'':'empty')+'">'+(this._content[column] || 'empty')+'</div>';
-        //html += '<div class="'+((this._content[column]!=null && this._content[column]!='')?'':'empty')+'">'+(this._content[column] || 'empty')+'</div>';
-      }
+
+      html += '<div class="country_name">'+(this._content["country_name"])+'</div>';
+      html += '<div class="total"><div class="icon"></div><div class="count">'+(this._content["total"])+'</div></div>';
+      html += '<div class="population"><div class="icon"></div><div class="count">'+(this._content["total_pop"])+'M</div></div>';
+      html += '<div class="gdp"><div class="icon"></div><div class="count">$'+(this._content["total_gdp"])+'K/Person</div></div>';
+
       this._contentNode.innerHTML = html;
     }
     this.fire('contentupdate');
@@ -208,13 +210,7 @@ L.CartoDBPopup = L.Class.extend({
     container.style.width = '';
     container.style.whiteSpace = 'nowrap';
 
-    var width = container.offsetWidth;
-    width = Math.min(width, this.options.maxWidth);
-    width = Math.max(width, this.options.minWidth);
-
-    container.style.width = (width + 1) + 'px';
     container.style.whiteSpace = '';
-
     container.style.height = '';
 
     var height = container.offsetHeight,
