@@ -3,6 +3,11 @@ maps        = {}
 selectedMap = null,
 mapToMove   = null;
 
+popups = {
+  actual: { p: new L.CartoDBPopup(), open: false },
+  gdp:    { p: new L.CartoDBPopup(), open: false }
+};
+
 
 var
 CONFIG = {
@@ -10,7 +15,7 @@ CONFIG = {
   table: 'london_2012_olympic_',
   center: new L.LatLng(36, -3),
   zoom: 4,
-  query: "SELECT * FROM {{table_name}}",
+  query: "SELECT ST_X(ST_Centroid(the_geom)) as longitude, ST_Y(ST_Centroid(the_geom)) as latitude, cartodb_id, the_geom_webmercator, iso, total_gdp, total, the_geom FROM {{table_name}}",
   tileURL: 'http:///{s}.tile.stamen.com/toner/{z}/{x}/{y}.png',
   mapOptions: { maxZoom: 18, attribution: "Powered by Leaflet and Mapbox", zoomControl: false},
   styles: {
@@ -37,13 +42,40 @@ CONFIG = {
   }
 };
 
-function getLayer(map, style) {
+function getLayer(id, popup, otherPopup, style) {
+
   return new L.CartoDBLayer({
-    map: map,
+    map: maps[id],
     user_name: CONFIG.user,
     table_name: CONFIG.table,
     query: CONFIG.query,
-    tile_style: style
+    tile_style: style,
+    interactivity: "cartodb_id, latitude, longitude",
+    featureOver: function(e,latlng,pos,data) {
+      document.body.style.cursor = "pointer";
+    },
+    featureOut: function() {
+      document.body.style.cursor = "default";
+    },
+    featureClick: function(e, latlng, pos, data) {
+
+      var latLng = new L.LatLng(data.latitude, data.longitude);
+      var other  = (id == "actual") ? "gdp" : "actual";
+
+      // Set popup content
+      popups[id].p.setContent(data);
+      popups[other].p.setContent(data);
+
+      // Set latlng
+      popups[id].p.setLatLng(latLng);
+      popups[other].p.setLatLng(latLng);
+
+      // Show it!
+      if (!popups[id].open) maps[id].openPopup(popups[id].p);
+      if (!popups[other].open) maps[other].openPopup(popups[other].p);
+
+      console.log(popups);
+    },
   });
 }
 
@@ -72,15 +104,21 @@ function init() {
   maps.actual = new L.Map('actual', { zoomControl: false }).setView(CONFIG.center, CONFIG.zoom);
   maps.gdp    = new L.Map('gdp',    { zoomControl: false }).setView(CONFIG.center, CONFIG.zoom);
 
+maps.actual.on("popupopen", function() { popups.actual.open = true; });
+maps.actual.on("popupclose", function() { popups.actual.open = false; });
+
+maps.gdp.on("popupopen", function() { popups.gdp.open = true; });
+maps.gdp.on("popupclose", function() { popups.gdp.open = false; });
+
   // Layers configuration
   var layers = {
     actual: {
       base: new L.TileLayer(CONFIG.tileURL, CONFIG.mapOptions),
-      data: getLayer(maps.actual, CONFIG.styles.actual)
+      data: getLayer("actual", popups.actual, popups.gdp, CONFIG.styles.actual)
     },
     gdp: {
       base: new L.TileLayer(CONFIG.tileURL, CONFIG.mapOptions),
-      data: getLayer(maps.gdp, CONFIG.styles.gdp)
+      data: getLayer("gdp", popups.gdp, popups.actual, CONFIG.styles.gdp)
     }
   };
 
