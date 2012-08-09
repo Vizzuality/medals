@@ -3,6 +3,36 @@
 @import "compass/css3";
 @import "helpers";
 
-html, body { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; background: #242424; }
+html, body { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; background: #FFF; }
 body { font-family: "Helvetica", Arial, sans-serif; }
 
+.maps {
+
+  li {
+    $width: 390px;
+    @include inline-block();
+
+    width: $width;
+
+    h1 {
+      padding: 20px 0;
+      color: $cWhite;
+      text-align:center;
+      text-transform: uppercase;
+      font-size:14px;
+      font-weight: bold;
+      font-family: "Helvetica Neue", sans-serif;
+    }
+
+    &.actual h1 { background: $cActual; }
+    &.gdp    h1 { background: $cGDP; }
+  }
+
+  .map {
+    $height: 461px;
+
+    background: $cGray5;
+
+    @include size(100%, $height);
+  }
+}
