@@ -33,6 +33,6 @@ body { font-family: "Helvetica", Arial, sans-serif; }
 
     background: $cGray5;
 
-    @include size(100%, $height);
+    @include size($width, $height);
   }
 }
