@@ -190,8 +190,11 @@ L.CartoDBPopup = L.Class.extend({
       if (value > 100) small = " small";
       else small = "";
 
-      html += '<div class="country_name">'+(this._content["name"])+'</div>';
-      html += '<div class="total '+ this._content["id"] + small + '"><div class="icon"></div><div class="count">' + value + '</div></div>';
+      if (this._content["kind"] == 'continent') kind = " extra-margin ";
+      else kind = "";
+
+      html += '<div class="country_name' + kind + '">' + this._content["name"] + '</div>';
+      html += '<div class="total ' + this._content["id"] + small + '"><div class="icon"></div><div class="count">' + value + '</div></div>';
       html += '<div class="population"><div class="icon"></div><div class="count">'+(this._content["pop"] / 1000000).toFixed(2)+'M</div></div>';
       if (rank) {
         html += '<div class="gdp"><div class="count">#'+ rank +' rank </div></div>';
