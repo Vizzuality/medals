@@ -191,19 +191,21 @@ L.CartoDBPopup = L.Class.extend({
       this._contentNode.innerHTML = '';
       var html = '';
 
-      var value = this._content["total_updated"];
+      var value = this._content["total"];
       var rank  = this._content["official_medal_ranking"];
 
-      if (this._content["id"] == 'map-gdp') value = this._content["total_gdp_updated"];
+      if (this._content["id"] == 'map-gdp') value = this._content["total_gdp"];
       if (this._content["id"] == 'map-gdp') rank = this._content["gdp_rank"];
 
       if (value > 100) small = " small";
       else small = "";
 
-      html += '<div class="country_name">'+(this._content["country_name"])+'</div>';
+      html += '<div class="country_name">'+(this._content["name"])+'</div>';
       html += '<div class="total '+ this._content["id"] + small + '"><div class="icon"></div><div class="count">' + value + '</div></div>';
-      html += '<div class="population"><div class="icon"></div><div class="count">'+(this._content["pop_2010"] / 1000000).toFixed(2)+'M</div></div>';
-      html += '<div class="gdp"><div class="count">#'+ rank +' rank </div></div>';
+      html += '<div class="population"><div class="icon"></div><div class="count">'+(this._content["pop"] / 1000000).toFixed(2)+'M</div></div>';
+      if (rank) {
+        html += '<div class="gdp"><div class="count">#'+ rank +' rank </div></div>';
+      }
 
       this._contentNode.innerHTML = html;
     }

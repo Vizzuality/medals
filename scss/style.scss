@@ -133,7 +133,7 @@ body { font-family: "Helvetica", Arial, sans-serif; }
 .leaflet-popup-content label {width:100%; margin:0; padding:0; font:bold 12px Arial; color:#333333;}
 .leaflet-popup-content p {width:100%; margin:2px 0 3px!important; padding:0; font:normal 12px Arial; color:#666666;}
 
-div.cartodb-popup {
+.cartodb-popup {
   position:absolute; display:block; width:172px; padding:0; -webkit-transform: translateZ(10000px);/*Hack for Safari*/
 
   &:hover {cursor:default;}
