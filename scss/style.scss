@@ -9,14 +9,11 @@ body { font-family: "Helvetica", Arial, sans-serif; }
 #wrapper {
   width: 100%;
   height: 100%;
-
-  background:red;
 }
 
 .maps {
   width: 100%;
   height:100%;
-  background:blue;
 
   $width: 50%;
   $height: 461px;
@@ -61,7 +58,6 @@ body { font-family: "Helvetica", Arial, sans-serif; }
     @include clearfix();
 
     li {
-      background:green;
       float:left;
       width: $width;
       position:relative;
@@ -158,7 +154,6 @@ div.cartodb-popup {
       padding: 0 0 8px 0;
       margin: 0 0 10px 0;
       border-bottom: 1px solid rgba(0, 0, 0, .09);
-
 
         &.small {
           padding: 10px 0;
