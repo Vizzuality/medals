@@ -112,15 +112,22 @@ function zoomEnd(e) {
   var id = $(e.target._container).attr("id");
   var mapToZoom = (id == "actual") ? "gdp" : "actual";
 
-  maps[mapToZoom].setZoom(e.target.getZoom());
+  var zoom = e.target.getZoom();
+  console.log(zoom);
+console.log($("#" + id).parent());
+
+  if (zoom <= 4) $(".zoom_out").addClass("disabled");
+  else $(".zoom_out").removeClass("disabled");
+
+  maps[mapToZoom].setZoom(zoom);
 
 }
 
 function init() {
 
   // Create the maps
-  maps.actual = new L.Map('actual', { minZoom: 3, maxZoom: 18, inertia: false, zoomControl: false }).setView(CONFIG.center, CONFIG.zoom);
-  maps.gdp    = new L.Map('gdp',    { minZoom: 3, maxZoom: 18, inertia: false, zoomControl: false }).setView(CONFIG.center, CONFIG.zoom);
+  maps.actual = new L.Map('actual', { minZoom: 4, maxZoom: 18, inertia: false, zoomControl: false }).setView(CONFIG.center, CONFIG.zoom);
+  maps.gdp    = new L.Map('gdp',    { minZoom: 4, maxZoom: 18, inertia: false, zoomControl: false }).setView(CONFIG.center, CONFIG.zoom);
 
   maps.actual.on("popupopen",  function() { popups.actual.open = true; });
   maps.actual.on("popupclose", function() { popups.actual.open = false; });

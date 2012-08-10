@@ -101,7 +101,17 @@ body { font-family: "Helvetica", Arial, sans-serif; }
   z-index: 1000;
 
   .zoom_in,
-  .zoom_out { display:block; position:relative; width: $zoomWidth; height: $zoomHeight; cursor: pointer; }
+  .zoom_out {
+    display:block;
+    position:relative;
+    width:  $zoomWidth;
+    height: $zoomHeight;
+    cursor: pointer;
+
+    &.disabled {
+      background: transparent url($url) no-repeat -3*$zoomWidth -1*$zoomHeight;
+    }
+  }
 
   .zoom_in {
     background: transparent url($url) no-repeat 0 0;
