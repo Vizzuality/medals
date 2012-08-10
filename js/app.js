@@ -15,8 +15,8 @@ CONFIG = {
   table: 'london_2012_olympic_',
   center: new L.LatLng(36, -3),
   zoom: 4,
-  query: "SELECT ST_X(ST_Centroid(the_geom)) as longitude, ST_Y(ST_Centroid(the_geom)) as latitude, the_geom_webmercator, country_name, iso, total_pop, total_gdp, total, the_geom FROM {{table_name}}",
-  tileURL: 'http:///{s}.tile.stamen.com/toner/{z}/{x}/{y}.png',
+  query: "SELECT ST_X(ST_Centroid(the_geom)) as longitude, ST_Y(ST_Centroid(the_geom)) as latitude, the_geom_webmercator, country_name, iso, total_pop, total_gdp, total FROM {{table_name}}",
+  tileURL: 'http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png',
   mapOptionsActual: { maxZoom: 18, attribution: "", zoomControl: false},
   mapOptionsGDP:    { maxZoom: 18, attribution: 'Powered by <a href="http://leaflet.cloudmade.com">Leaflet</a>', zoomControl: false},
   styles: {
@@ -152,6 +152,12 @@ function init() {
 
   maps.actual.on('zoomend', zoomEnd);
   maps.gdp.on('zoomend', zoomEnd);
+
+
+  $.ajax({url: "https://viz2.cartodb.com/api/v1/sql?q=SELECT ST_Y(st_centroid( ST_collect(the_geom))) as lng, ST_X(st_centroid( ST_collect(the_geom))) as lat, region FROM tm_world_borders_0_3 GROUP BY region", success: function(data) {
+    console.log(data);
+  }});
+
 
   $(".zoom_in").on("click", function() {
     var id = $(this).parents(".zoom").siblings('.map').attr("id");
