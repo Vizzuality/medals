@@ -181,10 +181,10 @@ L.CartoDBPopup = L.Class.extend({
       this._contentNode.innerHTML = '';
       var html = '';
 
-      var value = this._content["total"];
+      var value = this._content["total_medals"];
       var rank  = this._content["official_medal_ranking"];
 
-      if (this._content["id"] == 'map-gdp') value = this._content["total_gdp"];
+      if (this._content["id"] == 'map-gdp') value = this._content["total_medals_gdp"];
       if (this._content["id"] == 'map-gdp') rank = this._content["gdp_rank"];
 
       if (value > 100) small = " small";
