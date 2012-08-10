@@ -23,8 +23,26 @@ body { font-family: "Helvetica", Arial, sans-serif; }
 
   .full-screen {
     @include position(false, 50%, 10px, false);
+    margin-right: -120px;
+
+    text-transform: uppercase;
+    color: #fff;
+    font-size:14px;
+    font-weight: bold;
+    font-family: "Helvetica", Arial, sans-serif;
+    text-decoration:none;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 1px;
+
+    text-shadow: #000 0px 0px 2px ;
+
     z-index: 1000;
-    margin-right: -100px;
+
+    &:hover {
+      color: #ccc;
+      border-color: #ccc;
+
+    }
   }
 
   .divider {
@@ -136,7 +154,6 @@ div.cartodb-popup {
     text-align: center;
 
     .total {
-
 
       padding: 0 0 8px 0;
       margin: 0 0 10px 0;
