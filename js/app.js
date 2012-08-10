@@ -11,7 +11,7 @@ popups = {
 
 var
 CONFIG = {
-  user: 'viz2',
+  user: '',
   table: 'london_2012_olympic_updated',
   center: new L.LatLng(37, -85),
   zoom: 3,

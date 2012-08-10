@@ -6,14 +6,14 @@
  *               Licensed under <a
  *               href="http://opensource.org/licenses/mit-license.php">MIT</a>
  *               license.<br/> This library lets you to use CartoDB with Leaflet.
- *                 
+ *
  */
- 
+
 
 if (typeof(L.CartoDBLayer) === "undefined") {
 
   L.CartoDBLayer = L.Class.extend({
-    
+
     includes: L.Mixin.Events,
 
     options: {
@@ -22,10 +22,10 @@ if (typeof(L.CartoDBLayer) === "undefined") {
       auto_bound:     false,
       debug:          false,
       visible:        true,
-      tiler_domain:   "cartodb.com",
+      tiler_domain:   "d2c5ry9dy1ewvi.cloudfront.net",
       tiler_port:     "80",
       tiler_protocol: "http",
-      sql_domain:     "cartodb.com",
+      sql_domain:     "d2c5ry9dy1ewvi.cloudfront.net",
       sql_port:       "80",
       sql_protocol:   "http",
       extra_params: {},
@@ -55,8 +55,8 @@ if (typeof(L.CartoDBLayer) === "undefined") {
      *    sql_domain        -     SQL API domain (opcional - default = 'cartodb.com')
      *    sql_port          -     SQL API port as a string (opcional - default = '80')
      *    extra_params      -     In case you want to pass aditional params to cartodb tiler, pass them
-     *                            as an object     
-     *    cdn_url           -     If you want to use a CDN as a proxy set the URL   
+     *                            as an object
+     *    cdn_url           -     If you want to use a CDN as a proxy set the URL
      */
 
     initialize: function (options) {
@@ -69,7 +69,7 @@ if (typeof(L.CartoDBLayer) === "undefined") {
           throw('cartodb-leaflet needs at least a CartoDB table name and the Leaflet map object :(');
         } else { return }
       }
-      
+
       // Bounds? CartoDB does it
       if (options.auto_bound)
         this.setBounds();
@@ -366,13 +366,13 @@ if (typeof(L.CartoDBLayer) === "undefined") {
 
       // Add the cartodb tiles
       var cartodb_url = this.generateUrl("tiler") + '/tiles/' + this.options.table_name + '/{z}/{x}/{y}.png?sql=' + query +'&style=' + tile_style;
-      
-      // extra_params? 
+
+      // extra_params?
       for (_param in this.options.extra_params) {
          cartodb_url += "&"+_param+"="+this.options.extra_params[_param];
       }
 
-      
+
       this.layer = new L.TileLayer(cartodb_url,{attribution:'CartoDB', opacity: this.options.opacity});
 
       this.options.map.addLayer(this.layer,false);
@@ -383,7 +383,7 @@ if (typeof(L.CartoDBLayer) === "undefined") {
      * Add interaction cartodb tiles to the map
      */
     _addInteraction: function () {
-      
+
       var self = this;
 
       // interaction placeholder
@@ -444,19 +444,19 @@ if (typeof(L.CartoDBLayer) === "undefined") {
      * @return {Object} Options for L.TileLayer
      */
     _generateTileJson: function () {
-      var core_url = this.generateUrl("tiler");  
+      var core_url = this.generateUrl("tiler");
       var base_url = core_url + '/tiles/' + this.options.table_name + '/{z}/{x}/{y}';
       var tile_url = base_url + '.png';
       var grid_url = base_url + '.grid.json';
-      
+
       // SQL?
       if (this.options.query) {
         var query = 'sql=' + encodeURIComponent(this.options.query.replace(/\{\{table_name\}\}/g,this.options.table_name));
         tile_url = this._addUrlData(tile_url, query);
         grid_url = this._addUrlData(grid_url, query);
       }
-      
-      // extra_params? 
+
+      // extra_params?
       for (_param in this.options.extra_params) {
         tile_url = this._addUrlData(tile_url, _param+"="+this.options.extra_params[_param]);
         grid_url = this._addUrlData(grid_url, _param+"="+this.options.extra_params[_param]);
@@ -476,10 +476,10 @@ if (typeof(L.CartoDBLayer) === "undefined") {
         tile_url = this._addUrlData(tile_url, interactivity);
         grid_url = this._addUrlData(grid_url, interactivity);
       }
-      
+
       // Build up the tileJSON
       return {
-        blankImage: '../img/blank_tile.png', 
+        blankImage: '../img/blank_tile.png',
         tilejson: '1.0.0',
         scheme: 'xyz',
         tiles: [tile_url],
@@ -502,7 +502,7 @@ if (typeof(L.CartoDBLayer) === "undefined") {
      * Parse URI
      * @params {String} Tile url
      * @return {String} URI parsed
-     */    
+     */
     _parseUri: function (str) {
       var o = {
         strictMode: false,
@@ -540,27 +540,27 @@ if (typeof(L.CartoDBLayer) === "undefined") {
       url += (this._parseUri(url).query) ? '&' : '?';
       return url += data;
     },
-    
+
 
     /**
      * Generate a URL for the tiler
      * @params {String} Options including tiler_protocol, user_name, tiler_domain and tiler_port
-     */    
+     */
     generateUrl: function(type){
       //First check if we are using a CDN which in that case we dont need to do all this.
       if(this.options.cdn_url) {
         return this.options.cdn_url;
       }
-      
+
       if (type == "sql") {
-         return this.options.sql_protocol + 
-             "://" + ((this.options.user_name)?this.options.user_name+".":"")  + 
-             this.options.sql_domain + 
+         return this.options.sql_protocol +
+             "://" + ((this.options.user_name)?this.options.user_name+".":"")  +
+             this.options.sql_domain +
              ((this.options.sql_port != "") ? (":" + this.options.sql_port) : "");
        } else {
-         return this.options.tiler_protocol + 
-             "://" + ((this.options.user_name)?this.options.user_name+".":"")  + 
-             this.options.tiler_domain + 
+         return this.options.tiler_protocol +
+             "://" + ((this.options.user_name)?this.options.user_name+".":"")  +
+             this.options.tiler_domain +
              ((this.options.tiler_port != "") ? (":" + this.options.tiler_port) : "");
        }
     },
@@ -588,7 +588,7 @@ if (typeof(L.CartoDBLayer) === "undefined") {
         return map.mouseEventToLayerPoint(o.e)
       }
     }
-    
+
   });
 }
 

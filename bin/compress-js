@@ -2,7 +2,7 @@ java -jar bin/compiler.jar --js \
        js/libs/jquery.min.js \
        js/libs/leaflet.js \
        js/libs/wax.leaf-6.2.3.js \
-       js/libs/cartodb-leaflet-min.js \
+       js/libs/cartodb-leaflet.js \
        js/libs/cartodb-popup.js \
        js/helpers.js \
        js/app.js \
