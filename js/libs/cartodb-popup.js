@@ -191,14 +191,14 @@ L.CartoDBPopup = L.Class.extend({
       this._contentNode.innerHTML = '';
       var html = '';
 
-      var value = this._content["total"];
+      var value = this._content["total_updated"];
 
-      if (this._content["id"] == 'map-gdp') value = this._content["total_gdp"];
+      if (this._content["id"] == 'map-gdp') value = this._content["total_gdp_updated"];
 
       html += '<div class="country_name">'+(this._content["country_name"])+'</div>';
       html += '<div class="total '+ this._content["id"] +'"><div class="icon"></div><div class="count">'+(value)+'</div></div>';
       html += '<div class="population"><div class="icon"></div><div class="count">'+(this._content["pop_2010"] / 1000000).toFixed(2)+'M</div></div>';
-      html += '<div class="gdp"><div class="icon"></div><div class="count">$'+(this._content["total_gdp"])+'K/Person</div></div>';
+      html += '<div class="gdp"><div class="icon"></div><div class="count">$'+(this._content["total_gdp_updated"])+'K/Person</div></div>';
 
       this._contentNode.innerHTML = html;
     }
