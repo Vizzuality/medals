@@ -134,6 +134,7 @@ body { font-family: "Helvetica", Arial, sans-serif; }
 .leaflet-popup-content p {width:100%; margin:2px 0 3px!important; padding:0; font:normal 12px Arial; color:#666666;}
 
 .cartodb-popup {
+
   position:absolute; display:block; width:172px; padding:0; -webkit-transform: translateZ(10000px);/*Hack for Safari*/
 
   &:hover {cursor:default;}
@@ -224,6 +225,8 @@ body { font-family: "Helvetica", Arial, sans-serif; }
       padding: 0 0 8px 0;
       margin: 0 0 7px 0;
       border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+
+      &.extra-margin { margin-top: 12px; }
 
     }
 

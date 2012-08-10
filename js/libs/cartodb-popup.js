@@ -134,16 +134,6 @@ L.CartoDBPopup = L.Class.extend({
     L.DomEvent.addListener(container, 'mousedown', L.DomEvent.stopPropagation);
     L.DomEvent.addListener(container, 'touchend', L.DomEvent.stopPropagation);
 
-    if (this.options.closeButton) {
-      //closeButton = this._closeButton = L.DomUtil.create('a', 'close', container);
-      //closeButton.href = '#close';
-      //closeButton.innerHTML = 'x';
-
-      //L.DomEvent.addListener(closeButton, 'click', this._onCloseButtonClick, this);
-      //L.DomEvent.addListener(closeButton, 'touchend', this._onCloseButtonClick, this);
-      //L.DomEvent.disableClickPropagation(closeButton);
-    }
-
     var wrapper = this._wrapper = L.DomUtil.create('div', 'wrapper', container);
     L.DomEvent.addListener(this._wrapper, 'click', L.DomEvent.stopPropagation);
     L.DomEvent.disableClickPropagation(wrapper);
