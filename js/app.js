@@ -18,7 +18,7 @@ CONFIG = {
   user: '',
   table: 'london_2012_olympic_updated',
   center: new L.LatLng(37, -85),
-  minZoom: 2,
+  minZoom: 3,
   zoom: 4,
   query: "SELECT ST_X(ST_Centroid(the_geom)) as longitude, ST_Y(ST_Centroid(the_geom)) as latitude, the_geom_webmercator, country_name as name, iso, total_pop, pop_2010 as pop, total_gdp_updated as total_gdp, total_updated as total, official_medal_ranking, gdp_rank FROM {{table_name}}",
   query_continent: "SELECT ST_X(st_centroid(the_geom)) AS longitude, ST_Y(st_centroid(the_geom)) AS latitude, cartodb_id, name, the_geom_webmercator, (SELECT SUM(pop_2010) pop FROM london_2012_olympic_updated WHERE region_id = c.region_id) as pop, (SELECT SUM(total_updated) total FROM london_2012_olympic_updated WHERE region_id = c.region_id) as total, (SELECT SUM(total_gdp_updated) total_gdp FROM london_2012_olympic_updated WHERE region_id = c.region_id) as total_gdp FROM continents as c",
