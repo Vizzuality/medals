@@ -21,6 +21,12 @@ body { font-family: "Helvetica", Arial, sans-serif; }
   $width: 50%;
   $height: 461px;
 
+  .full-screen {
+    @include position(false, 50%, 10px, false);
+    z-index: 1000;
+    margin-right: -100px;
+  }
+
   .divider {
     @include position(0, false, false, 50%);
     margin-left: -8px;
