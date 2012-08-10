@@ -12,37 +12,35 @@ popups = {
 var
 CONFIG = {
   user: 'viz2',
-  //table: 'london_2012_olympic_',
   table: 'london_2012_olympic_updated',
   center: new L.LatLng(37, -85),
   zoom: 3,
-  //query: "SELECT ST_X(ST_Centroid(the_geom)) as longitude, ST_Y(ST_Centroid(the_geom)) as latitude, the_geom_webmercator, country_name, iso, total_pop, pop_2010, total_gdp, total FROM {{table_name}}",
   query: "SELECT ST_X(ST_Centroid(the_geom)) as longitude, ST_Y(ST_Centroid(the_geom)) as latitude, the_geom_webmercator, country_name, iso, total_pop, pop_2010, total_gdp_updated, total_updated, official_medal_ranking, gdp_rank FROM {{table_name}}",
   tileURL: 'http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png',
   mapOptionsActual: { inertia: false, attribution: "" },
   mapOptionsGDP:    { inertia: false, attribution: 'Basemap: <a href="http://maps.stamen.com">Stamen</a>' },
-  styles: {
-    gdp: "#london_2012_olympic_updated { point-file: url(/home/ubuntu/tile_assets/viz2/blueDot2.svg); point-allow-overlap:true; text-face-name: 'DejaVu Sans Bold'; text-fill:#000; text-size:10; text-halo-fill:rgba(255,255,255,1); text-halo-radius:0; text-line-spacing:1; text-wrap-width:20; text-opacity:.7; text-allow-overlap:true; text-name:'[iso]'; line-width:1.3; point-opacity: .8; } " +
-      "#london_2012_olympic_updated [total_gdp_updated <= 122] { point-transform:'scale(2.2)'; } " +
-      "#london_2012_olympic_updated [total_gdp_updated <= 60]  { point-transform:'scale(1.7)'; } " +
-      "#london_2012_olympic_updated [total_gdp_updated <= 30]  { point-transform:'scale(1.3)'; } " +
-      "#london_2012_olympic_updated [total_gdp_updated <= 10]  { point-transform:'scale(1)';   } " +
-      "#london_2012_olympic_updated [total_gdp_updated <= 5]   { point-transform:'scale(0.5)'; } " +
-      "#london_2012_olympic_updated [total_gdp_updated <= 3.5] { text-allow-overlap:false; point-transform:'scale(0.4)'; } " +
-      "#london_2012_olympic_updated [total_gdp_updated <= 2]   { point-transform:'scale(0.3)'; } " +
-      "#london_2012_olympic_updated [total_gdp_updated <= 1]   { point-transform:'scale(0.2)'; } " +
-      "#london_2012_olympic_updated [total_gdp_updated = 0]    { point-transform:'scale(0)'; } ",
-    actual: "#london_2012_olympic_updated { point-file: url(/home/ubuntu/tile_assets/viz2/orangeDot2.svg); point-allow-overlap:true; text-face-name: 'DejaVu Sans Bold'; text-fill:#000; text-size:10; text-halo-fill:rgba(255,255,255,1); text-halo-radius:0; text-line-spacing:1; text-wrap-width:20; text-opacity:.7; text-allow-overlap:true; text-name:'[iso]'; line-width:1.3; point-opacity: .8;}" +
-      "#london_2012_olympic_updated [total_updated <= 100] { point-transform:'scale(2.3)'; }" +
-      "#london_2012_olympic_updated [total_updated <= 50]  { point-transform:'scale(1.8)'; }" +
-      "#london_2012_olympic_updated [total_updated <= 30]  { point-transform:'scale(1.4)'; }" +
-      "#london_2012_olympic_updated [total_updated <= 15]  { point-transform:'scale(1.2)'; }" +
-      "#london_2012_olympic_updated [total_updated <= 10]  { point-transform:'scale(1)'; }" +
-      "#london_2012_olympic_updated [total_updated <= 8]   { point-transform:'scale(0.75)'; }" +
-      "#london_2012_olympic_updated [total_updated <= 4]   { point-transform:'scale(0.4)'; text-allow-overlap:false; }" +
-      "#london_2012_olympic_updated [total_updated <= 2]   { point-transform:'scale(0.15)'; }" +
-      "#london_2012_olympic_updated [total_updated = 0]    { point-transform:'scale(0)'; }"
-  }
+    styles: {
+      gdp: "#london_2012_olympic_updated { point-file: url(/home/ubuntu/tile_assets/viz2/blueDot2.svg); point-allow-overlap:true; text-face-name: 'DejaVu Sans Bold'; text-fill:#000; text-size:10; text-halo-fill:rgba(255,255,255,1); text-halo-radius:0; text-line-spacing:1; text-wrap-width:20; text-opacity:.7; text-allow-overlap:true; text-name:'[iso]'; line-width:1.3; point-opacity: .8; } " +
+        "#london_2012_olympic_updated [total_gdp_updated <= 122] { point-transform:'scale(2.2)'; } " +
+        "#london_2012_olympic_updated [total_gdp_updated <= 60]  { point-transform:'scale(1.7)'; } " +
+        "#london_2012_olympic_updated [total_gdp_updated <= 30]  { point-transform:'scale(1.3)'; } " +
+        "#london_2012_olympic_updated [total_gdp_updated <= 10]  { point-transform:'scale(1)';   } " +
+        "#london_2012_olympic_updated [total_gdp_updated <= 5]   { point-transform:'scale(0.5)'; } " +
+        "#london_2012_olympic_updated [total_gdp_updated <= 3.5] { text-allow-overlap:false; point-transform:'scale(0.4)'; } " +
+        "#london_2012_olympic_updated [total_gdp_updated <= 2]   { point-transform:'scale(0.3)'; } " +
+        "#london_2012_olympic_updated [total_gdp_updated <= 1]   { point-transform:'scale(0.2)'; } " +
+        "#london_2012_olympic_updated [total_gdp_updated = 0]    { point-transform:'scale(0)'; } ",
+      actual: "#london_2012_olympic_updated { point-file: url(/home/ubuntu/tile_assets/viz2/orangeDot2.svg); point-allow-overlap:true; text-face-name: 'DejaVu Sans Bold'; text-fill:#000; text-size:10; text-halo-fill:rgba(255,255,255,1); text-halo-radius:0; text-line-spacing:1; text-wrap-width:20; text-opacity:.7; text-allow-overlap:true; text-name:'[iso]'; line-width:1.3; point-opacity: .8;}" +
+        "#london_2012_olympic_updated [total_updated <= 100] { point-transform:'scale(2.3)'; }" +
+        "#london_2012_olympic_updated [total_updated <= 50]  { point-transform:'scale(1.8)'; }" +
+        "#london_2012_olympic_updated [total_updated <= 30]  { point-transform:'scale(1.4)'; }" +
+        "#london_2012_olympic_updated [total_updated <= 15]  { point-transform:'scale(1.2)'; }" +
+        "#london_2012_olympic_updated [total_updated <= 10]  { point-transform:'scale(1)'; }" +
+        "#london_2012_olympic_updated [total_updated <= 8]   { point-transform:'scale(0.75)'; }" +
+        "#london_2012_olympic_updated [total_updated <= 4]   { point-transform:'scale(0.4)'; text-allow-overlap:false; }" +
+        "#london_2012_olympic_updated [total_updated <= 2]   { point-transform:'scale(0.15)'; }" +
+        "#london_2012_olympic_updated [total_updated = 0]    { point-transform:'scale(0)'; }"
+    }
 };
 
 function getLayer(id, popup, otherPopup, style) {
@@ -84,9 +82,15 @@ function getLayer(id, popup, otherPopup, style) {
       // Show it!
       if (!popups[id].open) maps[id].openPopup(popups[id].p);
       if (!popups[other].open) maps[other].openPopup(popups[other].p);
-
-    },
+    }
   });
+}
+
+function dblclick(e) {
+  var id = $(e.target._container).attr("id");
+
+  mapToMove = (id == "actual") ? "gdp" : "actual";
+  maps[mapToMove].panTo(e.target.getCenter());
 }
 
 function dragEnd(e) {
@@ -156,6 +160,9 @@ function init() {
   maps.actual.on('zoomend', zoomEnd);
   maps.gdp.on('zoomend', zoomEnd);
 
+  maps.actual.on('dblclick', dblclick);
+  maps.gdp.on('dblclick', dblclick);
+
   $(".zoom_in").on("click", function() {
     var id = $(this).parents(".zoom").siblings('.map').attr("id");
     maps[id].setZoom(maps[id].getZoom() + 1);
@@ -170,4 +177,3 @@ function init() {
 
   });
 }
-
