@@ -19,8 +19,8 @@ CONFIG = {
   //query: "SELECT ST_X(ST_Centroid(the_geom)) as longitude, ST_Y(ST_Centroid(the_geom)) as latitude, the_geom_webmercator, country_name, iso, total_pop, pop_2010, total_gdp, total FROM {{table_name}}",
   query: "SELECT ST_X(ST_Centroid(the_geom)) as longitude, ST_Y(ST_Centroid(the_geom)) as latitude, the_geom_webmercator, country_name, iso, total_pop, pop_2010, total_gdp_updated, total_updated, official_medal_ranking, gdp_rank FROM {{table_name}}",
   tileURL: 'http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png',
-  mapOptionsActual: { maxZoom: 18, attribution: "", zoomControl: false},
-  mapOptionsGDP:    { maxZoom: 18, attribution: 'Basemap: <a href="http://maps.stamen.com">Stamen</a>', zoomControl: false},
+  mapOptionsActual: { inertia: false, maxZoom: 18, attribution: "" },
+  mapOptionsGDP:    { inertia: false, maxZoom: 18, attribution: 'Basemap: <a href="http://maps.stamen.com">Stamen</a>' },
   styles: {
     gdp: "#london_2012_olympic_updated { point-file: url(/home/ubuntu/tile_assets/viz2/blueDot2.svg); point-allow-overlap:true; text-face-name: 'DejaVu Sans Bold'; text-fill:#000; text-size:10; text-halo-fill:rgba(255,255,255,1); text-halo-radius:0; text-line-spacing:1; text-wrap-width:20; text-opacity:.7; text-allow-overlap:true; text-name:'[iso]'; line-width:1.3; point-opacity: .8; } " +
       "#london_2012_olympic_updated [total_gdp_updated <= 122] { point-transform:'scale(2.2)'; } " +
@@ -114,8 +114,8 @@ function zoomEnd(e) {
 function init() {
 
   // Create the maps
-  maps.actual = new L.Map('actual', { zoomControl: false }).setView(CONFIG.center, CONFIG.zoom);
-  maps.gdp    = new L.Map('gdp',    { zoomControl: false }).setView(CONFIG.center, CONFIG.zoom);
+  maps.actual = new L.Map('actual', { inertia: false, zoomControl: false }).setView(CONFIG.center, CONFIG.zoom);
+  maps.gdp    = new L.Map('gdp',    { inertia: false, zoomControl: false }).setView(CONFIG.center, CONFIG.zoom);
 
   maps.actual.on("popupopen", function() { popups.actual.open = true; });
   maps.actual.on("popupclose", function() { popups.actual.open = false; });
