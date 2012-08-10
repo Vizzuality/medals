@@ -14,7 +14,7 @@ CONFIG = {
   user: 'viz2',
   //table: 'london_2012_olympic_',
   table: 'london_2012_olympic_updated',
-  center: new L.LatLng(37, -95),
+  center: new L.LatLng(37, -85),
   zoom: 3,
   //query: "SELECT ST_X(ST_Centroid(the_geom)) as longitude, ST_Y(ST_Centroid(the_geom)) as latitude, the_geom_webmercator, country_name, iso, total_pop, pop_2010, total_gdp, total FROM {{table_name}}",
   query: "SELECT ST_X(ST_Centroid(the_geom)) as longitude, ST_Y(ST_Centroid(the_geom)) as latitude, the_geom_webmercator, country_name, iso, total_pop, pop_2010, total_gdp_updated, total_updated, official_medal_ranking, gdp_rank FROM {{table_name}}",
