@@ -150,7 +150,7 @@ div.cartodb-popup {
     .total {
 
       padding: 0 0 8px 0;
-      margin: 0 0 10px 0;
+      margin: 0 0 13px 0;
       border-bottom: 1px solid rgba(0, 0, 0, .09);
 
         &.small {
@@ -196,6 +196,7 @@ div.cartodb-popup {
 
     .population {
       margin: 0 0 5px 0;
+
       .icon {
         @include icons-sprite(people);
       }
@@ -212,7 +213,7 @@ div.cartodb-popup {
       font-family: "Helvetica", Arial, sans-serif;
       font-weight: bold;
       padding: 0 0 8px 0;
-      margin: 0 0 6px 0;
+      margin: 0 0 7px 0;
       border-bottom: 1px solid rgba(0, 0, 0, 0.09);
 
     }
