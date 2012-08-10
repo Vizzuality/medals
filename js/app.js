@@ -14,10 +14,10 @@ CONFIG = {
   user: 'viz2',
   //table: 'london_2012_olympic_',
   table: 'london_2012_olympic_updated',
-  center: new L.LatLng(36, -3),
+  center: new L.LatLng(37, -95),
   zoom: 4,
   //query: "SELECT ST_X(ST_Centroid(the_geom)) as longitude, ST_Y(ST_Centroid(the_geom)) as latitude, the_geom_webmercator, country_name, iso, total_pop, pop_2010, total_gdp, total FROM {{table_name}}",
-  query: "SELECT ST_X(ST_Centroid(the_geom)) as longitude, ST_Y(ST_Centroid(the_geom)) as latitude, the_geom_webmercator, country_name, iso, total_pop, pop_2010, total_gdp_updated, total_updated, total_athlete FROM {{table_name}}",
+  query: "SELECT ST_X(ST_Centroid(the_geom)) as longitude, ST_Y(ST_Centroid(the_geom)) as latitude, the_geom_webmercator, country_name, iso, total_pop, pop_2010, total_gdp_updated, total_updated, official_medal_ranking, gdp_rank FROM {{table_name}}",
   tileURL: 'http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png',
   mapOptionsActual: { maxZoom: 18, attribution: "", zoomControl: false},
   mapOptionsGDP:    { maxZoom: 18, attribution: 'Powered by <a href="http://leaflet.cloudmade.com">Leaflet</a>', zoomControl: false},
@@ -53,7 +53,7 @@ function getLayer(id, popup, otherPopup, style) {
     table_name: CONFIG.table,
     query: CONFIG.query,
     tile_style: style,
-    interactivity: "country_name, total_updated, total_gdp_updated, pop_2010, total_pop, latitude, longitude, total_athlete",
+    interactivity: "official_medal_ranking, gdp_rank, country_name, total_updated, total_gdp_updated, pop_2010, total_pop, latitude, longitude",
     featureOver: function(e,latlng,pos,data) {
       document.body.style.cursor = "pointer";
     },

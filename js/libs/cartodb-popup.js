@@ -192,8 +192,10 @@ L.CartoDBPopup = L.Class.extend({
       var html = '';
 
       var value = this._content["total_updated"];
+      var rank  = this._content["official_medal_ranking"];
 
       if (this._content["id"] == 'map-gdp') value = this._content["total_gdp_updated"];
+      if (this._content["id"] == 'map-gdp') rank = this._content["gdp_rank"];
 
       if (value > 100) small = " small";
       else small = "";
@@ -201,7 +203,7 @@ L.CartoDBPopup = L.Class.extend({
       html += '<div class="country_name">'+(this._content["country_name"])+'</div>';
       html += '<div class="total '+ this._content["id"] + small + '"><div class="icon"></div><div class="count">' + value + '</div></div>';
       html += '<div class="population"><div class="icon"></div><div class="count">'+(this._content["pop_2010"] / 1000000).toFixed(2)+'M</div></div>';
-      html += '<div class="gdp"><div class="count">'+(this._content["total_athlete"])+' Team size </div></div>';
+      html += '<div class="gdp"><div class="count">#'+ rank +' rank </div></div>';
 
       this._contentNode.innerHTML = html;
     }
