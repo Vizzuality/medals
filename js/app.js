@@ -1,5 +1,6 @@
 
 var
+changedLayers = true,
 actualLayer, gdpLayer,
 view        = "country",
 maps        = {}
@@ -154,14 +155,17 @@ function zoomEnd(e) {
   else $(".zoom_out").removeClass("disabled");
 
   if (zoom == CONFIG.minZoom) {
+    changedLayers = false;
     var view = "continent";
     actualLayer.setOptions({ interactivity: CONFIG.interactivity2, tile_style: CONFIG.styles.continent.actual, query: CONFIG.query_continent  });
     gdpLayer.setOptions({ interactivity: CONFIG.interactivity2, tile_style: CONFIG.styles.continent.gdp, query: CONFIG.query_continent  });
 
     $(".cartodb-popup").fadeOut(150);
 
-  } else {
+  } else if (zoom >= CONFIG.minZoom && !changedLayers) {
+    changedLayers = true;
     var view = "country";
+
     actualLayer.setOptions({ interactivity: CONFIG.interactivity, tile_style: CONFIG.styles.actual, query: CONFIG.query  });
     gdpLayer.setOptions({ interactivity: CONFIG.interactivity, tile_style: CONFIG.styles.gdp, query: CONFIG.query  });
 
