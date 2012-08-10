@@ -22,11 +22,11 @@ body { font-family: "Helvetica", Arial, sans-serif; }
   $height: 461px;
 
   .divider {
-    @include position(-5px, false, false, 50%);
+    @include position(0, false, false, 50%);
     margin-left: -8px;
     width: 16px;
-    height: 525px;
-    @include icons-sprite(divider);
+    height: 100%;
+    background: url(../img/icons/divider.png) repeat-y;
 
     z-index: 1000;
   }
