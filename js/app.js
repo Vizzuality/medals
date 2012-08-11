@@ -29,21 +29,21 @@ CONFIG = {
     styles: {
       continent: {
         actual: "#london_2012_olympic_updated{ point-file: url(/home/ubuntu/tile_assets/viz2/orangeDot2.svg); point-allow-overlap:true; text-face-name: 'DejaVu Sans Bold'; text-fill:#000; text-size:10; text-halo-fill:rgba(255,255,255,1); text-halo-radius:0; text-line-spacing:1; text-wrap-width:20; text-opacity:.7; text-allow-overlap:true; text-name:'[name]'; line-width:1.3; }" +
-          "#london_2012_olympic_updated[total_medals <=334] { point-transform:'scale(2.3)'; }" +
-          "#london_2012_olympic_updated[total_medals <=194] { point-transform:'scale(1.8)'; }" +
-          "#london_2012_olympic_updated[total_medals <=153] { point-transform:'scale(1.4)'; }" +
-          "#london_2012_olympic_updated[total_medals <=39]  { point-transform:'scale(1.2)'; }" +
-          "#london_2012_olympic_updated[total_medals <=22]  { point-transform:'scale(1)'; }" +
+          "#london_2012_olympic_updated[total_medals <=382] { point-transform:'scale(2.3)'; }" +
+          "#london_2012_olympic_updated[total_medals <=218] { point-transform:'scale(1.8)'; }" +
+          "#london_2012_olympic_updated[total_medals <=171] { point-transform:'scale(1.4)'; }" +
+          "#london_2012_olympic_updated[total_medals <=45]  { point-transform:'scale(1.2)'; }" +
+          "#london_2012_olympic_updated[total_medals <=27]  { point-transform:'scale(1)'; }" +
           "#london_2012_olympic_updated[total_medals <=8]   { point-transform:'scale(0.75)'; }" +
           "#london_2012_olympic_updated[total_medals <=4]   { point-transform:'scale(0.4)'; text-allow-overlap:false; }" +
           "#london_2012_olympic_updated[total_medals <=2]   { point-transform:'scale(0.15)'; }" +
           "#london_2012_olympic_updated[total_medals =0]    { point-transform:'scale(0)'; }",
         gdp: "#london_2012_olympic_updated{ point-file: url(/home/ubuntu/tile_assets/viz2/blueDot2.svg); point-allow-overlap:true; text-face-name: 'DejaVu Sans Bold'; text-fill:#000; text-size:10; text-halo-fill:rgba(255,255,255,1); text-halo-radius:0; text-line-spacing:1; text-wrap-width:20; text-opacity:.7; text-allow-overlap:true; text-name:'[name]'; line-width:1.3; }" +
-          "#london_2012_olympic_updated[total_medals_gdp<=248] { point-transform:'scale(2.3)'; }" +
-          "#london_2012_olympic_updated[total_medals_gdp<=232] { point-transform:'scale(1.8)'; }" +
-          "#london_2012_olympic_updated[total_medals_gdp<=186] { point-transform:'scale(1.4)'; }" +
-          "#london_2012_olympic_updated[total_medals_gdp<=64]  { point-transform:'scale(1.2)'; }" +
-          "#london_2012_olympic_updated[total_medals_gdp<=12]  { point-transform:'scale(1)'; }" +
+          "#london_2012_olympic_updated[total_medals_gdp<=276] { point-transform:'scale(2.3)'; }" +
+          "#london_2012_olympic_updated[total_medals_gdp<=260] { point-transform:'scale(1.8)'; }" +
+          "#london_2012_olympic_updated[total_medals_gdp<=202] { point-transform:'scale(1.4)'; }" +
+          "#london_2012_olympic_updated[total_medals_gdp<=77]  { point-transform:'scale(1.2)'; }" +
+          "#london_2012_olympic_updated[total_medals_gdp<=15]  { point-transform:'scale(1)'; }" +
           "#london_2012_olympic_updated[total_medals_gdp<=8]   { point-transform:'scale(0.75)'; }" +
           "#london_2012_olympic_updated[total_medals_gdp<=4]   { point-transform:'scale(0.4)'; text-allow-overlap:false; }" +
           "#london_2012_olympic_updated[total_medals_gdp<=2]   { point-transform:'scale(0.15)'; }" +
