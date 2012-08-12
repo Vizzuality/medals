@@ -60,7 +60,7 @@ CONFIG = {
         "#london_2012_olympic_updated [total_medals_gdp <= 1]   { point-transform:'scale(0.2)'; } " +
         "#london_2012_olympic_updated [total_medals_gdp = 0]    { point-transform:'scale(0)'; } ",
       actual: "#london_2012_olympic_updated { point-file: url(/home/ubuntu/tile_assets/viz2/orangeDot2.svg); point-allow-overlap:true; text-face-name: 'DejaVu Sans Bold'; text-fill:#000; text-size:10; text-halo-fill:rgba(255,255,255,1); text-halo-radius:0; text-line-spacing:1; text-wrap-width:20; text-opacity:.7; text-allow-overlap:true; text-name:'[iso]'; line-width:1.3; }" +
-        "#london_2012_olympic_updated [total_medals <= 102] { point-transform:'scale(2.3)'; }" +
+        "#london_2012_olympic_updated [total_medals <= 105] { point-transform:'scale(2.3)'; }" +
         "#london_2012_olympic_updated [total_medals <= 50]  { point-transform:'scale(1.8)'; }" +
         "#london_2012_olympic_updated [total_medals <= 30]  { point-transform:'scale(1.4)'; }" +
         "#london_2012_olympic_updated [total_medals <= 15]  { point-transform:'scale(1.2)'; }" +
